@@ -1,0 +1,28 @@
+# ///LocalHost
+
+### Get All Monsters
+GET http://localhost:3000/monsters
+### GET Monster ID
+GET http://localhost:3000/monsters/67dc435dcbbbe3a64a9de91d
+### Create Monster
+POST http://localhost:3000/monsters http/1.1
+Content-Type: application/json
+
+{
+    "name": "gore",
+    "element": "fire",
+    "weakSpot": "head"
+}
+
+### Get All Users
+GET http://localhost:3000/users
+### GET Monster ID
+GET http://localhost:3000/users/67dc460ccbbbe3a64a9de921
+### Create Monster
+POST http://localhost:3000/users http/1.1
+Content-Type: application/json
+
+{
+    "username": "gore",
+    "password": "fire"
+}

@@ -4,17 +4,25 @@ const ObjectId = require("mongodb").ObjectId;
 // functions
 const getAll = async (req, res) => {
     const result = await mongodb.getDB().db().collection('monster').find();
-    result.toArray().then((monster) => {
+    result.toArray((err, monsters) => {
+        if(err) {
+            res.status(400).json({message: err});
+        }
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(monster);
+        res.status(200).json(monsters);
     });
 };
 
 const getSingle = async (req, res) => {
+    if(!ObjectId.isValid(req.params.id)) {
+        res.status(400).json("Must use a valid monster ID to find.");
+    }
     const monsterId = new ObjectId(req.params.id);
-    console.log(monsterId)
     const result = await mongodb.getDB().db().collection("monster").find({_id: monsterId});
-    result.toArray().then((monster) => {
+    result.toArray((err, monster) => {
+        if(err) {
+            res.status(400).json({message: err});
+        }
         res.setHeader("Content-Type", "application/json");
         res.status(200).json(monster[0]);
     });
@@ -36,6 +44,9 @@ const createMonster = async (req, res) => {
 }
 
 const updateMonster = async (req, res) => {
+    if(!ObjectId.isValid(req.params.id)) {
+        res.status(400).json("Must use a valid monster ID to update.");
+    }
     const monsterId = new ObjectId(req.params.id);
 
     const monster = {
@@ -54,6 +65,9 @@ const updateMonster = async (req, res) => {
 };
 
 const deleteMonster = async (req, res) => {
+    if(!ObjectId.isValid(req.params.id)) {
+        res.status(400).json("Must use a valid monster ID to delete.");
+    }
     const monsterId = new ObjectId(req.params.id);
     const response = await mongodb.getDB().db().collection("monster").deleteOne({_id: monsterId});
     

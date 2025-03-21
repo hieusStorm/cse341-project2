@@ -14,6 +14,10 @@ app.use((req, res, next) => {
 });
 app.use("/", require("./routes"));
 
+process.on('uncaughtException', (err, origin) => {
+    console.log(process.stderr.fd, `cuaght exception: ${err}\n` + `Exception Origin: ${origin}\n`);
+});
+
 mongodb.initDb((err)=> {
     if(err) {
         console.error(err);

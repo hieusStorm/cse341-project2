@@ -14,6 +14,19 @@ Content-Type: application/json
     "weakSpot": "head"
 }
 
+### Update Monster
+PUT http://localhost:3000/monsters/67dc435dcbbbe3a64a9de91d
+Content-Type: application/json
+
+{
+    "name": "rathalos",
+    "element": "dragon",
+    "weakSpot": "head"
+}
+
+### Delete a Monster
+DELETE http://localhost:3000/monsters/67dc5bf5e9730ca02c9deee1
+
 ### Get All Users
 GET http://localhost:3000/users
 ### GET Monster ID

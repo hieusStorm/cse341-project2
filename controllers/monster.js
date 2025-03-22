@@ -4,13 +4,24 @@ const ObjectId = require("mongodb").ObjectId;
 // functions
 const getAll = async (req, res) => {
     //#swagger.tags['Monsters']
+    // mongodb
+    // .getDB()
+    // .db()
+    // .collection('monster')
+    // .find()
+    // .toArray((err, monsters) => {
+    //     if(err) {
+    //         res.status(400).json({message: err});
+    //     }
+    //     res.setHeader('Content-Type', 'application/json');
+    //     res.status(200).json(monsters);
+    // });
     const result = await mongodb.getDB().db().collection('monster').find();
-    result.toArray((err, monsters) => {
-        if(err) {
-            res.status(400).json({message: err});
-        }
+    result.toArray().then((monsters) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(monsters);
+    }).catch((err) => {
+        res.status(400).json({message: err});
     });
 };
 
@@ -21,13 +32,10 @@ const getSingle = async (req, res) => {
     }
     const monsterId = new ObjectId(req.params.id);
     const result = await mongodb.getDB().db().collection("monster").find({_id: monsterId});
-    result.toArray((err, monster) => {
-        if(err) {
-            res.status(400).json({message: err});
-        }
+    result.toArray().then((monster) => {
         res.setHeader("Content-Type", "application/json");
         res.status(200).json(monster[0]);
-    });
+    }).catch((err) => res.status(400).json({message: err}));
 };
 
 const createMonster = async (req, res) => {

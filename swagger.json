@@ -5,11 +5,10 @@
     "description": "Monster Weaknesses Api",
     "version": "1.0.0"
   },
-  "host": "https://cse341-project2-6qqg.onrender.com",
+  "host": "cse341-project2-6qqg.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "paths": {
     "/": {

@@ -3,6 +3,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 // functions
 const getAll = async (req, res) => {
+    //#swagger.tags['Monsters']
     const result = await mongodb.getDB().db().collection('monster').find();
     result.toArray((err, monsters) => {
         if(err) {
@@ -14,6 +15,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+    //#swagger.tags['Monsters']
     if(!ObjectId.isValid(req.params.id)) {
         res.status(400).json("Must use a valid monster ID to find.");
     }
@@ -29,6 +31,7 @@ const getSingle = async (req, res) => {
 };
 
 const createMonster = async (req, res) => {
+    //#swagger.tags['Monsters']
     const monster = {
         name: req.body.name,
         element: req.body.element,
@@ -44,6 +47,7 @@ const createMonster = async (req, res) => {
 }
 
 const updateMonster = async (req, res) => {
+    //#swagger.tags['Monsters']
     if(!ObjectId.isValid(req.params.id)) {
         res.status(400).json("Must use a valid monster ID to update.");
     }
@@ -65,6 +69,7 @@ const updateMonster = async (req, res) => {
 };
 
 const deleteMonster = async (req, res) => {
+    //#swagger.tags['Monsters']
     if(!ObjectId.isValid(req.params.id)) {
         res.status(400).json("Must use a valid monster ID to delete.");
     }

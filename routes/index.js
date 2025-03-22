@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 router.get("/", (req, res) => {
+    //#swagger.tags=['Welcome Api']
     res.send("Welcome to my api");
 });
 
